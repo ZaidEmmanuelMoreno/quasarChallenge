@@ -17,8 +17,17 @@ import com.quasar.util.Constants;
 
 import io.jsonwebtoken.Jwts;
 
+/**
+ * @author emmanuel
+ *
+ */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	
+	/**
+	 * Constructor that sets the AuthenticationManager
+	 * 
+	 * @param authManager
+	 */
 	public JWTAuthorizationFilter(AuthenticationManager authManager) {
 		super(authManager);
 	}
@@ -36,6 +45,12 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 		chain.doFilter(req, res);
 	}
 
+	/**
+	 * Method that builds the jwt token for the access to application resources.
+	 * 
+	 * @param request				Request information for HTTP servlets.
+	 * @return						null if user does not exists.
+	 */
 	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
 		String token = request.getHeader(Constants.HEADER_AUTHORIZACION_KEY);
 		if (token != null) {

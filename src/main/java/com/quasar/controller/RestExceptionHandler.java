@@ -12,6 +12,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.quasar.model.Error;
 
+/**
+ * @author emmanuel
+ *
+ */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -20,8 +24,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
        return buildResponseEntity(new Error(HttpStatus.BAD_REQUEST.getReasonPhrase()), HttpStatus.BAD_REQUEST);
    }
-
-   private ResponseEntity<Object> buildResponseEntity(Error error, HttpStatus httpStatus) {
+   
+   /**
+    * Method that builds a responseEntity with error message.
+    * 
+	* @param error					Error object with the detail of the error.
+	* @param httpStatus				Status http of the response.
+	 * @return						ResponseEntity with error object.
+	*/
+	private ResponseEntity<Object> buildResponseEntity(Error error, HttpStatus httpStatus) {
        return new ResponseEntity<>(error, httpStatus);
    }
 

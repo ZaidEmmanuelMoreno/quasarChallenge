@@ -9,15 +9,29 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+/**
+ * @author emmanuel
+ *
+ */
 public class HttpUtil {
 
 	private static final String LOCALHOST_IPV4 = "127.0.0.1";
 	private static final String LOCALHOST_IPV6 = "0:0:0:0:0:0:0:1";
 
+	/**
+	 * Methot that returns an Http Serlvet Request, from the request context holder.
+	 * 
+	 * @return						An HttpServletRequest object.
+	 */
 	public static HttpServletRequest getRequest() {
 		return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 	}
 	
+	/**
+	 * Method that returns the ip adress of the client from the request context holder.
+	 * 
+	 * @return						Ip adress of the client.
+	 */
 	public static String getClientIp() {
 		
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

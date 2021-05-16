@@ -23,11 +23,20 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * @author emmanuel
+ *
+ */
 @Log4j2
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 	private AuthenticationManager authenticationManager;
 
+	/**
+	 * Constructor that sets the authentication manager.
+	 * 
+	 * @param authenticationManager		Object that processes an Authentication request.
+	 */
 	public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
 	}

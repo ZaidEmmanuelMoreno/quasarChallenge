@@ -12,6 +12,10 @@ import org.springframework.stereotype.Component;
 import com.quasar.entity.User;
 import com.quasar.repository.UserRepository;
 
+/**
+ * @author emmanuel
+ *
+ */
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 

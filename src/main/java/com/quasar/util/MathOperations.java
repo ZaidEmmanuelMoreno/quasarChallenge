@@ -9,9 +9,20 @@ import org.springframework.stereotype.Component;
 import com.quasar.model.Coordinates;
 import com.quasar.model.Equation;
 
+/**
+ * @author emmanuel
+ *
+ */
 @Component
 public class MathOperations {
 
+	/**
+	 * From x, y coordinates and the radius, generate the equation of the circumference, and store it in an object.
+	 * 
+	 * @param coordinates			An object that stores x and y coordinates, what is the center of the circle.
+	 * @param radius				Radius of the circle.
+	 * @return						Objeto que contiene la ecuacion de la circunferencia,(se asume que x^2 = 1 y y^2 = 1, por lo que no se almacenan)
+	 */
 	public Equation getCircumferenceEquation(Coordinates coordinates, double radius) {
 		
 		double a = coordinates.getX() * -2;
@@ -21,6 +32,20 @@ public class MathOperations {
 		return new Equation(Util.roundingDecimals(a,2),Util.roundingDecimals(b,2),Util.roundingDecimals(c,2),0);
 	}
 
+	/**
+	 * Method that calculates the x and y intersection points between two circles, following the following steps:
+	* 1.- A sum of equations is made to eliminate the quadratic terms.
+	* 2.- Solve for x and obtain a linear equation.
+	* 3.- We substitute x in the first equation of the circumference.
+	* 4.- The quadratic term and the multiplication of terms are solved
+	* 5.- It is simplified to clear and positive and negative.
+	* 6.- The coordinates are constructed and added to the intersection list.
+	 * 
+	 * @param coordinatesList			List of coordinates, which are the points of intersection.
+	 * @param circleEquationOne			Equation of circumference one.
+	 * @param circleEquationTwoNormal	Equation of circumference two.
+	 * @return							List of coordinates, which are the points of intersection.
+	 */
 	public List<Coordinates> getTwoCirclesIntersection(List<Coordinates> coordinatesList, Equation circleEquationOne, Equation circleEquationTwoNormal) {
 
 		double ySquared, y, independentTerm, yTwo, independentTermTwo;
@@ -82,6 +107,13 @@ public class MathOperations {
 		return coordinatesList;
 	}
 
+	/**
+	 * Method that obtains the points (coordinates) that are repeated the most in the list of coordinates, these are the points where the three intersect
+	 * circles, which is where the message comes from.
+	 * 
+	 * @param coordinatesList		List of coordinates, which are the points of intersection.
+	 * @return						Empty ResponseEntity with http status.
+	 */
 	public Coordinates getCoordinates(List<Coordinates> coordinatesList) {
 
 		LinkedList<String> coordinatesListS = new LinkedList<>();

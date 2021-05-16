@@ -1,5 +1,8 @@
 package com.quasar.util;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.quasar.exception.CustomErrorValidationException;
@@ -7,11 +10,28 @@ import com.quasar.model.Validation;
 import com.quasar.model.request.Satellite;
 import com.quasar.model.request.TopSecretRequest;
 
+import lombok.extern.log4j.Log4j2;
+
+/**
+ * @author emmanuel
+ *
+ */
+@Log4j2
 @Component
 public class Validator {
 
-	public Validation validateFields(TopSecretRequest topSecretRequest) {
+	/**
+	 * Method that validates the fields of the endpoint / top_secret, when it finds an incorrect field, it throws an exception and then stores it 
+	 * in a Validation type object, with which it is possible to decide if the process continues or should be stopped.
+	 * 
+	 * @param topSecretRequest		Object that contains a list of satellites, which contain the name of the satellite to which it is directed, the distance 
+	 * 								to the satellite, and the incomplete string arrangement of the message.
+	 * @return						Validation type object, which contains a boolean that indicates if it is valid or not and the message if it is not valid.
+	 */
+	public Validation ValidateFields(TopSecretRequest topSecretRequest) {
 		Validation validation = new Validation(true, "");
+		List<List<String>> messagesList = new LinkedList<>();
+		int messageSize = 0;
 		
 		try {
 			if(topSecretRequest.getSatellites() == null || topSecretRequest.getSatellites().isEmpty()) {
@@ -22,6 +42,10 @@ public class Validator {
 					if(satellite.getMessage() == null || satellite.getMessage().isEmpty()) {
 						throw new CustomErrorValidationException(false, Constants.EMPTY_MESSAGE);
 					}
+					else {
+						messagesList.add(satellite.getMessage());
+						messageSize = satellite.getMessage().size();
+					}
 					if(satellite.getName() == null || satellite.getName().isEmpty()) {
 						throw new CustomErrorValidationException(false, Constants.EMPTY_NAME);
 					}
@@ -29,9 +53,16 @@ public class Validator {
 						if( !satellite.getName().equalsIgnoreCase(Constants.SHIP_KENOBI) && 
 							!satellite.getName().equalsIgnoreCase(Constants.SHIP_SKYWALKER) && 
 							!satellite.getName().equalsIgnoreCase(Constants.SHIP_SATO)) {
-							throw new CustomErrorValidationException(false, Constants.INCORECT_SHIP);
+							throw new CustomErrorValidationException(false, Constants.INCORRECT_SHIP);
 						}
 					}
+				}
+			}
+			
+			for(List<String> message : messagesList) {
+				log.info("size:"+message.size());
+				if(messageSize != message.size()) {
+					throw new CustomErrorValidationException(false, Constants.INCORRECT_MESSAGE_SIZE);
 				}
 			}
 		}
@@ -42,4 +73,37 @@ public class Validator {
 		return validation;
 	}
 
+	/**
+	 * Method that validates the fields of the endpoint / top_secret, when it finds an incorrect field, it throws an exception and then stores it 
+	 * in a Validation type object, with which it is possible to decide if the process continues or should be stopped.
+	 * 
+	 * @param satelliteName			Name of the satellite to which it is directed.
+	 * @param satellite				Object containing the distance to the satellite, and the incomplete string array of the message.
+	 * @return						Validation type object, which contains a boolean that indicates if it is valid or not and the message if it is not valid.
+	 */
+	public Validation ValidateFields(String satelliteName, Satellite satellite) {
+		Validation validation = new Validation(true, "");
+		
+		try {
+			if(satellite == null) {
+				throw new CustomErrorValidationException(false, Constants.EMPTY_SATELLITE);
+			}
+			else {
+				if(satellite.getMessage() == null || satellite.getMessage().isEmpty()) {
+					throw new CustomErrorValidationException(false, Constants.EMPTY_MESSAGE);
+				}
+				if( !satelliteName.equalsIgnoreCase(Constants.SHIP_KENOBI) && 
+						!satelliteName.equalsIgnoreCase(Constants.SHIP_SKYWALKER) && 
+						!satelliteName.equalsIgnoreCase(Constants.SHIP_SATO)) {
+						throw new CustomErrorValidationException(false, Constants.INCORRECT_SHIP);
+				}
+			}
+		}
+		catch (CustomErrorValidationException ceve) {
+			validation = new Validation(ceve.isFlag(), ceve.getMessage());
+		}
+		
+		return validation;
+	}
+	
 }

@@ -6,6 +6,10 @@ import com.quasar.model.Coordinates;
 
 import lombok.Data;
 
+/**
+ * @author emmanuel
+ *
+ */
 @Data
 public class TopSecretResponse implements Serializable {
 	private static final long serialVersionUID = 1L;

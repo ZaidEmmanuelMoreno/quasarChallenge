@@ -6,10 +6,14 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.quasar.entity.ImperialCargoShip;
 
+/**
+ * @author emmanuel
+ *
+ */
 public interface ImperialCargoShipDao extends CrudRepository<ImperialCargoShip, Long> {
 
-	public ImperialCargoShip findByNameAndIp(String name, String ip);
+	public ImperialCargoShip findByNameAndIpAddress(String name, String ipAddress);
 
-	public List<ImperialCargoShip> findAllByIp(String ip);
+	public List<ImperialCargoShip> findAllByIpAddress(String ipAddress);
 	
 }

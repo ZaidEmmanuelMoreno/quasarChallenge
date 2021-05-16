@@ -1,11 +1,12 @@
 package com.quasar.entity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,23 +20,18 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "imperial_cargo_ship")
-public class ImperialCargoShip {
+@Table(name = "users")
+public class User {
 
 	@Id
+	@JsonIgnore(value = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "name", nullable = false)
-	private String name;
 	
-	@Column(nullable = false)
-	private double distance;
+	@Column(name = "username", nullable = false, unique = true)
+	private String username;
 
-	@Column(nullable = false)
-	private String message;
-
-	@Column(name = "ip_address", nullable = false)
-	private String ipAddress;
+	@Column(name = "password", nullable = false)
+	private String password;
 	
 }

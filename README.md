@@ -2,7 +2,7 @@
 
 _Admission challenge to Mercado Libre, by C Emmanuel Moreno T._
 
-## Comenzando
+## Starting
 
 Download the project with the command
 
@@ -24,7 +24,7 @@ See ** Deployment ** to know how to deploy the project.
 _Spring Tool Suite 4, Version: 4.7.0.RELEASE_
 _Account in Google Cloud Platform_
 
-### Installation 🔧
+### Installation
 
 Create an sql instance in Google Cloud Platform with the name _quasar-db_ inside a project called _quasarchallenge_
 See

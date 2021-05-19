@@ -10,13 +10,10 @@ import com.quasar.model.Validation;
 import com.quasar.model.request.Satellite;
 import com.quasar.model.request.TopSecretRequest;
 
-import lombok.extern.log4j.Log4j2;
-
 /**
  * @author emmanuel
  *
  */
-@Log4j2
 @Component
 public class Validator {
 
@@ -60,7 +57,6 @@ public class Validator {
 			}
 			
 			for(List<String> message : messagesList) {
-				log.info("size:"+message.size());
 				if(messageSize != message.size()) {
 					throw new CustomErrorValidationException(false, Constants.INCORRECT_MESSAGE_SIZE);
 				}

@@ -21,7 +21,7 @@ public class ImperialCargoShipRepository {
 
 	@Autowired
 	private ImperialCargoShipDao imperialCargoShipDao;
-	
+
 	/**
 	 * Method that queries information from the imperial_cargo_ship table, by name and ip.
 	 * 

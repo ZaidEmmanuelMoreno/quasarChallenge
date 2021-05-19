@@ -56,6 +56,18 @@ public class GolangService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	/**
+	 * Method that sets the repositories objects, for the tests, the autowired annotation does not work, so the objects is setted manually.
+	 * 
+	 * @param validator
+	 * @param shipLocationRepository
+	 */
+	public void setTestsObjects(Validator validator, ShipLocationRepository shipLocationRepository, MathOperations mathOperations) {
+		this.validator = validator;
+		this.shipLocationRepository = shipLocationRepository;
+		this.mathOperations = mathOperations;
+	}
+
+	/**
 	 * Method that by means of a list of satellites, mathematically calculates the coordinates and the secret message.
 	 * 
 	 * @param 	topSecretRequest	Object that contains a list of satellites, which contain the name of the satellite to which it is directed, the distance 
@@ -92,6 +104,11 @@ public class GolangService {
 			
 			topSecretResponse.setMessage(this.getMessage(listMessages));
 			topSecretResponse.setPosition(this.getLocation(distanceKenobi, distanceSkywalker, distanceSato));
+			
+			if(new Double(topSecretResponse.getPosition().getX()).isNaN() || new Double(topSecretResponse.getPosition().getY()).isNaN()) {
+				return new ResponseEntity<ErrorResponse>(new ErrorResponse(new Error(Constants.INCORRECT_DISTANCES)), HttpStatus.BAD_REQUEST);
+			}
+			
 		}
 		catch(Exception e) {
 			log.error("Total execution time topSecret {} Error: {}", System.currentTimeMillis()-startTime, e.getMessage());
@@ -225,19 +242,25 @@ public class GolangService {
 	public Coordinates getLocation(double distanceKenobi, double distanceSkywalker, double distanceSato) {
 		List<Coordinates> coordinatesList = new LinkedList<Coordinates>();
 
-		ShipLocation shipLocationKenobi = shipLocationRepository.findByName(Constants.SHIP_KENOBI);
-		ShipLocation shipLocationSkywalker = shipLocationRepository.findByName(Constants.SHIP_SKYWALKER);
-		ShipLocation shipLocationSato = shipLocationRepository.findByName(Constants.SHIP_SATO);
+		try {
+			ShipLocation shipLocationKenobi = shipLocationRepository.findByName(Constants.SHIP_KENOBI);
+			ShipLocation shipLocationSkywalker = shipLocationRepository.findByName(Constants.SHIP_SKYWALKER);
+			ShipLocation shipLocationSato = shipLocationRepository.findByName(Constants.SHIP_SATO);
+			
+			Equation circleEquationKenobi = mathOperations.getCircumferenceEquation(new Coordinates(shipLocationKenobi.getXCoordinate(), shipLocationKenobi.getYCoordinate()), distanceKenobi);
+			Equation circleEquationSkywalker = mathOperations.getCircumferenceEquation(new Coordinates(shipLocationSkywalker.getXCoordinate(), shipLocationSkywalker.getYCoordinate()), distanceSkywalker);
+			Equation circleEquationSato = mathOperations.getCircumferenceEquation(new Coordinates(shipLocationSato.getXCoordinate(), shipLocationSato.getYCoordinate()), distanceSato);
+			
+			coordinatesList = mathOperations.getTwoCirclesIntersection(coordinatesList, circleEquationKenobi, circleEquationSkywalker);
+			coordinatesList = mathOperations.getTwoCirclesIntersection(coordinatesList, circleEquationSkywalker, circleEquationSato);
+			coordinatesList = mathOperations.getTwoCirclesIntersection(coordinatesList, circleEquationKenobi, circleEquationSato);
 		
-		Equation circleEquationKenobi = mathOperations.getCircumferenceEquation(new Coordinates(shipLocationKenobi.getXCoordinate(), shipLocationKenobi.getYCoordinate()), distanceKenobi);
-		Equation circleEquationSkywalker = mathOperations.getCircumferenceEquation(new Coordinates(shipLocationSkywalker.getXCoordinate(), shipLocationSkywalker.getYCoordinate()), distanceSkywalker);
-		Equation circleEquationSato = mathOperations.getCircumferenceEquation(new Coordinates(shipLocationSato.getXCoordinate(), shipLocationSato.getYCoordinate()), distanceSato);
-		
-		coordinatesList = mathOperations.getTwoCirclesIntersection(coordinatesList, circleEquationKenobi, circleEquationSkywalker);
-		coordinatesList = mathOperations.getTwoCirclesIntersection(coordinatesList, circleEquationSkywalker, circleEquationSato);
-		coordinatesList = mathOperations.getTwoCirclesIntersection(coordinatesList, circleEquationKenobi, circleEquationSato);
-		
-		return mathOperations.getCoordinates(coordinatesList);
+			return mathOperations.getCoordinates(coordinatesList);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	/**

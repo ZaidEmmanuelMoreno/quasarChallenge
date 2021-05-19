@@ -16,6 +16,7 @@ public class Constants {
 	public static final String EMPTY_MESSAGE				= "The field 'message' must be present";
 	public static final String INCORRECT_SHIP				= "The field 'name' must be ['kenobi','skywalker','sato']";
 	public static final String INCORRECT_MESSAGE_SIZE		= "The message array does not have the correct size";
+	public static final String INCORRECT_DISTANCES			= "The distances provided are not correct";
 	
 	
 	public static final String INSUFFICIENT_INFORMATION		= "Insufficent information, please send all ships";

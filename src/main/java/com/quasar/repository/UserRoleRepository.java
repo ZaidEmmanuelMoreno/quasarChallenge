@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.quasar.dao.UserRoleDao;
+import com.quasar.entity.Role;
 import com.quasar.entity.User;
 import com.quasar.entity.UserRole;
 
@@ -30,8 +31,11 @@ public class UserRoleRepository {
 	 * @return						UserRole object, the one that was stored in the database.
 	 */
 	@Transactional(rollbackFor = Exception.class, isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW)
-	public void saveNewUser(User user, UserRole userRole) {
-		userRepository.save(user);
+	public void saveNewUser(User user, Role role) {
+		user = userRepository.save(user);
+		UserRole userRole = new UserRole();
+		userRole.setUserId(user.getId());
+		userRole.setRoleId(role.getId());
 		userRoleDao.save(userRole);
 	}
 

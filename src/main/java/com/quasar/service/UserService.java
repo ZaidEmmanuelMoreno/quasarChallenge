@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.quasar.entity.Role;
 import com.quasar.entity.User;
-import com.quasar.entity.UserRole;
 import com.quasar.enums.RolesEnum;
 import com.quasar.model.Error;
 import com.quasar.model.request.CreateUserRequest;
@@ -51,14 +50,8 @@ public class UserService {
 			User user = new User();
 			user.setUsername(createUserRequest.getUsername());
 			user.setPassword(bcryptPasswordEncoder.encode(createUserRequest.getPassword()));
-//			user = userRepository.save(user);
-			
 			Optional<Role> role = roleRepository.findByName(RolesEnum.USER.getValue());
-			UserRole userRole = new UserRole();
-			userRole.setUserId(user.getId());
-			userRole.setRoleId(role.get().getId());
-			
-			userRoleRepository.saveNewUser(user,userRole);
+			userRoleRepository.saveNewUser(user,role.get());
 			
 		}
 		catch(Exception e) {

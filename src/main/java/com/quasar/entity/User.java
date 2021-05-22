@@ -14,9 +14,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,8 +28,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(value = Include.NON_NULL)
 public class User implements UserDetails {
 	private static final long serialVersionUID = 1L;
 

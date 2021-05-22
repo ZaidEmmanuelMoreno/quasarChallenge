@@ -31,7 +31,7 @@ public class ImperialCargoShipRepository {
 	 */
 	@Transactional(readOnly = true)
 	public Optional<ImperialCargoShip> findByNameAndIpAddress(String name, String ipAddress) {
-		return Optional.ofNullable(imperialCargoShipDao.findByNameAndIpAddress(name, ipAddress));
+		return imperialCargoShipDao.findByNameAndIpAddress(name, ipAddress);
 	}
 	
 	/**
@@ -42,7 +42,7 @@ public class ImperialCargoShipRepository {
 	 */
 	@Transactional(readOnly = true)
 	public Optional<List<ImperialCargoShip>> findAllByIpAddress(String ipAddress) {
-		return Optional.ofNullable((List<ImperialCargoShip>) imperialCargoShipDao.findAllByIpAddress(ipAddress));
+		return imperialCargoShipDao.findAllByIpAddress(ipAddress);
 	}
 	
 	/**

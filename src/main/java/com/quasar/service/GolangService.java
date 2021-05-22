@@ -87,7 +87,8 @@ public class GolangService {
 		
 		if(!validation.isValid()) {
 			log.error("Total execution time topSecret {} Error: {}", System.currentTimeMillis()-startTime, validation.getMessage());
-			return new ResponseEntity<ErrorResponse>(new ErrorResponse(new Error(validation.getMessage())), HttpStatus.BAD_REQUEST);
+			HttpStatus httpStatus = (validation.getMessage().equals(Constants.INCORRECT_MESSAGE_SIZE)) ? httpStatus = HttpStatus.NOT_FOUND : HttpStatus.BAD_REQUEST;
+			return new ResponseEntity<ErrorResponse>(new ErrorResponse(new Error(validation.getMessage())), httpStatus);
 		}
 		
 		try {
@@ -107,7 +108,7 @@ public class GolangService {
 			topSecretResponse.setPosition(this.getLocation(distanceKenobi, distanceSkywalker, distanceSato));
 			
 			if(new Double(topSecretResponse.getPosition().getX()).isNaN() || new Double(topSecretResponse.getPosition().getY()).isNaN()) {
-				return new ResponseEntity<ErrorResponse>(new ErrorResponse(new Error(Constants.INCORRECT_DISTANCES)), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<ErrorResponse>(new ErrorResponse(new Error(Constants.INCORRECT_DISTANCES)), HttpStatus.NOT_FOUND);
 			}
 			
 		}

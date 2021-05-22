@@ -21,16 +21,13 @@ See ** Deployment ** to know how to deploy the project.
 
 ### Pre-requirements
 
-_Spring Tool Suite 4, Version: 4.7.0.RELEASE_
+_Spring Tool Suite 4, Version: 4.7.0.RELEASE_, 
 _Account in Google Cloud Platform_
 
 ### Installation
 
 Create an sql instance in Google Cloud Platform with the name _quasar-db_ inside a project called _quasarchallenge_
-See
-```
-https://www.youtube.com/watch?v=cIBWgPN0vK4
-```
+[See](https://www.youtube.com/watch?v=cIBWgPN0vK4) - Configuration example
 
 Replace password in _application-dev.properties_
 ```
@@ -38,10 +35,7 @@ spring.datasource.password={PASSWORD_INSTANCIA_SQL}
 ```
 
 Create the service accounts key and replace it in _credentials.json_
-See
-```
-https://cloud.google.com/iam/docs/creating-managing-service-account-keys
-```
+[See](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) - Configuration example
 
 ## Running the tests
 
@@ -59,7 +53,7 @@ curl --location --request POST 'localhost:3200/login' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "username":"admin",
-    "password":"$2a$10$Fbj03SfEm1Z5ayDxk4ytHeuSPtkVKRU5h.2ymHNVwlZeGyJxqmFRG"
+    "password":"password"
 }'
 ```
 

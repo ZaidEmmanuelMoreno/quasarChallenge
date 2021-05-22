@@ -14,6 +14,9 @@ import com.quasar.model.request.TopSecretRequest;
 import com.quasar.service.GolangService;
 import com.quasar.util.HttpUtil;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 /**
  * @author emmanuel
  *
@@ -33,6 +36,7 @@ public class GolangController {
 	 * @return						ResponseEntity with the coordinates and the constructed message.
 	 */
 	@PostMapping("/topsecret")
+	@ApiOperation(value = "Endpoint that receives a list of satellites and mathematically calculates the coordinates and the secret message sent by the imperial cargo carrier")
 	public ResponseEntity<?> topsecret(@RequestBody TopSecretRequest topSecretRequest) {
 		return golangService.topSecret(topSecretRequest);
 	}
@@ -46,7 +50,8 @@ public class GolangController {
 	 * @return						Empty ResponseEntity with http status.
 	 */
 	@PostMapping("/topsecret_split/{satellite_name}")
-	public ResponseEntity<?> topsecretSplit(@PathVariable("satellite_name") String satelliteName, @RequestBody Satellite satellite) {
+	@ApiOperation(value = "Endpoint that receives only one satellite and stores it in the database.")
+	public ResponseEntity<?> topsecretSplit(@ApiParam(value = "Name of the satellite to which it is directed.", required = true) @PathVariable("satellite_name") String satelliteName, @RequestBody Satellite satellite) {
 		return golangService.topsecretSplit(satelliteName, satellite, HttpUtil.getClientIp());
 	}
 
@@ -57,18 +62,20 @@ public class GolangController {
 	 * @return						ResponseEntity with the coordinates and the constructed message.
 	 */
 	@GetMapping("/topsecret_split")
+	@ApiOperation(value = "Endpoint that mathematically calculates the coordinates and the secret message sent by the imperial cargo carrier, only if you have the information of the 3 satellites [Kenobi, Skywalker and Sato], registered in the endpoint \"/topsecret_split/{satellite_name}\".")
 	public ResponseEntity<?> topsecretSplit() {
 		return golangService.topsecretSplit(HttpUtil.getClientIp());
 	}
 	
 	/**
-	 * Endpoint that encode a text string
+	 * Endpoint that encode a text string.
 	 * 
 	 * @param text					Text to encode.
 	 * @return						ResponseEntity with the encoded text.
 	 */
 	@PostMapping("/encrypt")
-	public ResponseEntity<?> encrypt(@RequestParam String text) {
+	@ApiOperation(value = "Endpoint that encode a text string.")
+	public ResponseEntity<?> encrypt(@ApiParam(value = "Text to encode.", required = true) @RequestParam String text) {
 		return golangService.encrypt(text);
 	}
 	

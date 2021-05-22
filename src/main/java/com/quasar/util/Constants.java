@@ -24,7 +24,16 @@ public class Constants {
 
 	public static final String HEADER_AUTHORIZACION_KEY		= "Authorization";
 	public static final String TOKEN_BEARER_PREFIX			= "Bearer ";
+	public static final String ROLES						= "roles";
 	public static final String SUPER_SECRET_KEY				= "qpalkd8283bu";
+	public static final String CONSTRAINT					= "constraint";
+	public static final String ERROR_CONSTRAINT				= "The user already exists";
+	
 	public static final long TOKEN_EXPIRATION_TIME			= 900000;
 	
+	public static final String[] AUTH_WHITELIST 			= {
+																"/v2/api-docs", "/swagger-resources", "/swagger-resources/**", "/configuration/ui", 
+																"/configuration/security", "/swagger-ui.html", "/webjars/**", "/v3/api-docs/**", 
+																"/swagger-ui/**"
+															};
 }

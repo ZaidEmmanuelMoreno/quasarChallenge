@@ -1,5 +1,7 @@
 package com.quasar.dao;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.quasar.entity.User;
@@ -10,7 +12,7 @@ import com.quasar.entity.User;
  */
 public interface UserDao extends CrudRepository<User, Long> {
 
-	public User findByUsernameAndPassword(String username, String password);
-	public User findByUsername(String username);
+	public Optional<User> findByUsernameAndPassword(String username, String password);
+	public Optional<User> findByUsername(String username);
 	
 }

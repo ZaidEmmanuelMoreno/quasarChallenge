@@ -3,6 +3,7 @@ package com.quasar.service;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -243,13 +244,13 @@ public class GolangService {
 		List<Coordinates> coordinatesList = new LinkedList<Coordinates>();
 
 		try {
-			ShipLocation shipLocationKenobi = shipLocationRepository.findByName(Constants.SHIP_KENOBI);
-			ShipLocation shipLocationSkywalker = shipLocationRepository.findByName(Constants.SHIP_SKYWALKER);
-			ShipLocation shipLocationSato = shipLocationRepository.findByName(Constants.SHIP_SATO);
+			Optional<ShipLocation> shipLocationKenobi = shipLocationRepository.findByName(Constants.SHIP_KENOBI);
+			Optional<ShipLocation> shipLocationSkywalker = shipLocationRepository.findByName(Constants.SHIP_SKYWALKER);
+			Optional<ShipLocation> shipLocationSato = shipLocationRepository.findByName(Constants.SHIP_SATO);
 			
-			Equation circleEquationKenobi = mathOperations.getCircumferenceEquation(new Coordinates(shipLocationKenobi.getXCoordinate(), shipLocationKenobi.getYCoordinate()), distanceKenobi);
-			Equation circleEquationSkywalker = mathOperations.getCircumferenceEquation(new Coordinates(shipLocationSkywalker.getXCoordinate(), shipLocationSkywalker.getYCoordinate()), distanceSkywalker);
-			Equation circleEquationSato = mathOperations.getCircumferenceEquation(new Coordinates(shipLocationSato.getXCoordinate(), shipLocationSato.getYCoordinate()), distanceSato);
+			Equation circleEquationKenobi = mathOperations.getCircumferenceEquation(new Coordinates(shipLocationKenobi.get().getXCoordinate(), shipLocationKenobi.get().getYCoordinate()), distanceKenobi);
+			Equation circleEquationSkywalker = mathOperations.getCircumferenceEquation(new Coordinates(shipLocationSkywalker.get().getXCoordinate(), shipLocationSkywalker.get().getYCoordinate()), distanceSkywalker);
+			Equation circleEquationSato = mathOperations.getCircumferenceEquation(new Coordinates(shipLocationSato.get().getXCoordinate(), shipLocationSato.get().getYCoordinate()), distanceSato);
 			
 			coordinatesList = mathOperations.getTwoCirclesIntersection(coordinatesList, circleEquationKenobi, circleEquationSkywalker);
 			coordinatesList = mathOperations.getTwoCirclesIntersection(coordinatesList, circleEquationSkywalker, circleEquationSato);

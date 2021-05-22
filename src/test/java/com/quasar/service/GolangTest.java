@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,9 +49,9 @@ public class GolangTest {
 	@Test
 	public void topSecret() {
 
-		when(shipLocationRepository.findByName(Constants.SHIP_KENOBI)).thenReturn(new ShipLocation((long) 1, "kenobi", -500, -200));
-		when(shipLocationRepository.findByName(Constants.SHIP_SKYWALKER)).thenReturn(new ShipLocation((long) 2, "skywalker", 100, -100));
-		when(shipLocationRepository.findByName(Constants.SHIP_SATO)).thenReturn(new ShipLocation((long) 3, "sato", 500, 100));
+		when(shipLocationRepository.findByName(Constants.SHIP_KENOBI)).thenReturn(Optional.of(new ShipLocation((long) 1, "kenobi", -500, -200)));
+		when(shipLocationRepository.findByName(Constants.SHIP_SKYWALKER)).thenReturn(Optional.of(new ShipLocation((long) 2, "skywalker", 100, -100)));
+		when(shipLocationRepository.findByName(Constants.SHIP_SATO)).thenReturn(Optional.of(new ShipLocation((long) 3, "sato", 500, 100)));
 		
 		TopSecretRequest topSecretRequest = new TopSecretRequest();
 		List<Satellite> satellites = new LinkedList<>();

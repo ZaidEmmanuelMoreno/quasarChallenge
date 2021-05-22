@@ -1,5 +1,7 @@
 package com.quasar.dao;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.quasar.entity.ShipLocation;
@@ -10,6 +12,6 @@ import com.quasar.entity.ShipLocation;
  */
 public interface ShipLocationDao extends CrudRepository<ShipLocation, Long> {
 	
-	public ShipLocation findByName(String name);
+	public Optional<ShipLocation> findByName(String name);
 	
 }

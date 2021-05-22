@@ -1,6 +1,7 @@
 package com.quasar.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,7 +29,7 @@ public class ShipLocationRepository {
 	 * @return						An ShipLocation object, containing the name, x_coordinate and y_coordinate.
 	 */
 	@Transactional(readOnly = true)
-	public ShipLocation findByName(String name) {
+	public Optional<ShipLocation> findByName(String name) {
 		return shipLocationDao.findByName(name);
 	}
 	

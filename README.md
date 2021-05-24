@@ -27,7 +27,7 @@ _Account in Google Cloud Platform_
 ### Installation
 
 Create an sql instance in Google Cloud Platform with the name _quasar-db_ inside a project called _quasarchallenge_
-[See](https://www.youtube.com/watch?v=cIBWgPN0vK4) - Configuration example
+[youtube](https://www.youtube.com/watch?v=cIBWgPN0vK4) - Configuration example
 
 Replace password in _application-dev.properties_
 ```
@@ -35,7 +35,7 @@ spring.datasource.password={PASSWORD_INSTANCIA_SQL}
 ```
 
 Create the service accounts key and replace it in _credentials.json_
-[See](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) - Configuration example
+[creating-managing-service-account-keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) - Configuration example
 
 ## Running the tests
 
@@ -134,11 +134,32 @@ Response
 }
 ```
 
+You can import the postman collection from the file, and try it yourself.
+```
+/quasarChallenge/Challenge.postman_collection.json
+```
+
+
 ## Deployment
 
-To display, right click on the _quasarChallenge_ project and then
+To deploy, right click on the _quasarChallenge_ project and then
 ```
 Run as/run configurations/Apartado Spring Boot App/pestaña Spring Boot/ seleccionar profile 'dev'
+```
+To deploy in App Engine, in GCP [deploying-your-app](https://cloud.google.com/appengine/docs/standard/java11/testing-and-deploying-your-app?authuser=1) - Deployment example
+
+In your console, run the comand
+```
+mvn clean install package
+```
+And then
+```
+mvn appengine:deploy -e
+```
+The url of the deployed app: [QuasarChallenge](https://quasarchallenge.uc.r.appspot.com) - quasarchallenge
+Or you can see the swagger in
+```
+https://quasarchallenge.uc.r.appspot.com/swagger-ui.html
 ```
 
 ## Built with

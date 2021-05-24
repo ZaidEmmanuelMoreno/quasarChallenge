@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "8b5d146e-ca5d-4661-951e-f17a8658d323",
+		"name": "Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "topsecret",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"satellites\":[\n      {\n         \"name\":\"kenobi\",\n         \"distance\":509.9019513592785,\n         \"message\":[\"este\",\"\",\"\",\"mensaje\",\"\"]\n      },\n      {\n         \"name\":\"skywalker\",\n         \"distance\":640.3124237432849,\n         \"message\":[\"\",\"es\",\"\",\"\",\"secreto\"]\n      },\n      {\n         \"name\":\"sato\",\n         \"distance\":921.9544457292888,\n         \"message\":[\"este\",\"\",\"un\",\"\",\"\"]\n      }\n   ]\n}"
+				},
+				"url": {
+					"raw": "https://quasarchallenge.uc.r.appspot.com/topsecret",
+					"protocol": "https",
+					"host": [
+						"quasarchallenge",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"topsecret"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "topsecret_split [kenobi]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"distance\":509.9019513592785,\n    \"message\":[\"este\",\"\",\"\",\"mensaje\",\"\"]\n}"
+				},
+				"url": {
+					"raw": "https://quasarchallenge.uc.r.appspot.com/topsecret_split/kenobi",
+					"protocol": "https",
+					"host": [
+						"quasarchallenge",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"topsecret_split",
+						"kenobi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "topsecret_split [skywalker]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"skywalker\",\n    \"distance\":640.3124237432849,\n    \"message\":[\"\",\"es\",\"\",\"\",\"secreto\"]\n}"
+				},
+				"url": {
+					"raw": "https://quasarchallenge.uc.r.appspot.com/topsecret_split/skywalker",
+					"protocol": "https",
+					"host": [
+						"quasarchallenge",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"topsecret_split",
+						"skywalker"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "topsecret_split [sato]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"sato\",\n    \"distance\":921.9544457292888,\n    \"message\":[\"este\",\"\",\"un\",\"\",\"\"]\n}"
+				},
+				"url": {
+					"raw": "https://quasarchallenge.uc.r.appspot.com/topsecret_split/sato",
+					"protocol": "https",
+					"host": [
+						"quasarchallenge",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"topsecret_split",
+						"sato"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "topsecret_split GET",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://quasarchallenge.uc.r.appspot.com/topsecret_split",
+					"protocol": "https",
+					"host": [
+						"quasarchallenge",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"topsecret_split"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"admin\",\n    \"password\":\"password\"\n}"
+				},
+				"url": {
+					"raw": "https://quasarchallenge.uc.r.appspot.com/login",
+					"protocol": "https",
+					"host": [
+						"quasarchallenge",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "encrypt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://quasarchallenge.uc.r.appspot.com/encrypt?text=password",
+					"protocol": "https",
+					"host": [
+						"quasarchallenge",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"encrypt"
+					],
+					"query": [
+						{
+							"key": "text",
+							"value": "password"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"Juan\",\n    \"password\":\"12345\"\n}"
+				},
+				"url": {
+					"raw": "https://quasarchallenge.uc.r.appspot.com/user/create",
+					"protocol": "https",
+					"host": [
+						"quasarchallenge",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"user",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "Bearer  eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MjE3MjY3ODEsInN1YiI6ImFkbWluIiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJleHAiOjE2MjE3Mjc2ODF9.tV8U3eGXGSb2MXt1yjrbZhkfp_xCqNlXFhVlm4jT71_JXvnkTHXqPQrzRpit98bwpEea_IyPPPy84xYC-ikNuw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "challenge_auth",
+			"value": "Bearer  eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MjE2MTU2MjYsInN1YiI6ImFkbWluIiwiZXhwIjoxNjIxNjE2NTI2fQ.9lMrDYIFh69HKvHI_4GPE-5M9vq9WuCrqeEB_r3gLaTUc8Z-5tvfBYXPZeQB3iRz_4UtYZMHyKJHeOGXaqTiMQ"
+		}
+	]
+}

@@ -1,6 +1,6 @@
 # Quasar Challenge
 
-_Admission challenge to Mercado Libre, by C Emmanuel Moreno T._
+_Admission challenge to Mercado Libre, by C Emmanuel Moreno T._  [Doc](https://github.com/ZaidEmmanuelMoreno/quasarChallenge/blob/main/Quasar-documentation.pdf) - Documentation in Spanish
 
 ## Starting
 
